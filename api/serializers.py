@@ -6,9 +6,14 @@ from portfolio.models import Category, Portfolio
 
 
 class PortfolioSerializer(serializers.ModelSerializer):
+    category = serializers.SerializerMethodField()
     class Meta:
         model = Portfolio
-        fields = ['id', 'title', 'desc', 'image', 'githup', 'projects']
+        fields = ['id', 'title', 'desc', 'category', 'image', 'githup', 'projects']
+        
+    def get_category(self, obj):
+        return obj.category.name if obj.category else None
+
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -17,3 +22,6 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ['id', 'name', 'portfolios']
+        
+        
+        

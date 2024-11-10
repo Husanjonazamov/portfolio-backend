@@ -25,10 +25,14 @@ SECRET_KEY = 'django-insecure-a9(=u2xo)%uy!rz@zhy^n*c*%cayuj%!00=2h1%+g2%u4dgsw^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*',
+    "http://localhost:3000",
+]
 
 
 # Application definition
+CORS_ALLOW_ALL_ORIGINS = True
 
 INSTALLED_APPS = [
     'jazzmin',
@@ -41,6 +45,7 @@ INSTALLED_APPS = [
     
     # install 
     'rest_framework',
+    'corsheaders',
     # app 
     'home',
     'api',
@@ -48,6 +53,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # bu yuqorida bo'lishi kerak
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'config.urls'
